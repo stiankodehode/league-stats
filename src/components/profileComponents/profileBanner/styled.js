@@ -2,13 +2,14 @@ import styled from "styled-components";
 
 export const ProfileBannerBox = styled.div`
     padding-top: 25px;
-    width: 80%;
     display: flex;
     align-items: center;
+    margin-bottom: 25px;
 `;
 
 export const ProfileInfo = styled.div`
     padding: 25px;
+    width: 250px;
     position: relative;
     display: flex;
     align-items: center;

@@ -19,11 +19,11 @@ const SearchPage = () => {
 
     const summonerSearch = async (e) => {
         e.preventDefault();
-        await summonerData.updateSummonerInfo(searchValue);
-        await summonerData.updateRankInfo();
-        await summonerData.updateMatchIds();
-        await summonerData.updateMatchData();
-        console.log(summonerData);
+        // await summonerData.updateSummonerInfo(searchValue);
+        // await summonerData.updateRankInfo();
+        // await summonerData.updateMatchIds();
+        // await summonerData.updateMatchData();
+        setSummonerData(JSON.parse(localStorage.getItem("lastSummoner")));
         navigate("/profile");
     };
 

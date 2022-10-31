@@ -26,5 +26,9 @@ export const AppContainer = styled.div`
     background-position: center;
     background-size: cover;
     background-color: #122361;
-    height: 100vh;
+    min-height: 100vh;
+`;
+
+export const Spacer = styled.div`
+    height: 75px;
 `;

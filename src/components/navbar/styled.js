@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export const StyledNav = styled.nav`
+    position: fixed;
+    z-index: 100;
     width: 100%;
     /* From https://css.glass */
     background: rgba(255, 255, 255, 0.24);

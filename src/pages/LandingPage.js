@@ -5,11 +5,13 @@ import ProfilePage from "./landingPage/ProfilePage";
 import Leaderboard from "./landingPage/Leaderboard";
 import { SummonerContext } from "../contextState/summonerContext";
 import { useContext } from "react";
+import { Spacer } from "../components/globalStyled";
 const LandingPage = () => {
     const { summonerData, setSummonerData } = useContext(SummonerContext);
     return (
         <>
             <Navbar />
+            <Spacer />
             <Routes>
                 <Route path="*" element={<SearchPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
