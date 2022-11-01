@@ -15,9 +15,7 @@ import MatchHistory from "../../components/profileComponents/MatchHistory";
 
 const ProfilePage = () => {
     const { summonerData, setSummonerData } = useContext(SummonerContext);
-    const { summonerInfo } = summonerData;
-    console.log(summonerData);
-
+    const { summonerInfo, recentMatchData } = summonerData;
     const navigate = useNavigate();
     useEffect(() => {
         if (summonerInfo === undefined) {
@@ -33,10 +31,15 @@ const ProfilePage = () => {
             <ProfileBanner summonerInfo={summonerInfo} />
             <PageWrapper>
                 <RankedStats>
+                    {/* Solo/Duo Data */}
                     <QueueBanner data={summonerData.rankInfo[1]} />
+                    {/* Flex Data */}
                     <QueueBanner data={summonerData.rankInfo[0]} />
                 </RankedStats>
-                <MatchHistory />
+                <MatchHistory
+                    recentMatchData={recentMatchData}
+                    currentSummoner={summonerData.summonerName}
+                />
             </PageWrapper>
         </ProfilePageContainer>
     );

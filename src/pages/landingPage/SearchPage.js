@@ -17,16 +17,22 @@ const SearchPage = () => {
     const [searchValue, setSearchValue] = useState("");
     const navigate = useNavigate();
 
+    // Fetches all the data for the summoner typed in input field
     const summonerSearch = async (e) => {
         e.preventDefault();
         // await summonerData.updateSummonerInfo(searchValue);
         // await summonerData.updateRankInfo();
         // await summonerData.updateMatchIds();
         // await summonerData.updateMatchData();
+
+        // localStorage.setItem("lastSummoner", JSON.stringify(summonerData));
+
         setSummonerData(JSON.parse(localStorage.getItem("lastSummoner")));
+
         navigate("/profile");
     };
 
+    // updates the searchValue from the input
     const handleSearch = (e) => {
         setSearchValue(e.target.value);
     };

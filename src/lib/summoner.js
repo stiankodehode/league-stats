@@ -44,7 +44,7 @@ class Summoner {
         } else {
             const promise = await axios
                 .get(
-                    `https://EUROPE.api.riotgames.com/lol/match/v5/matches/by-puuid/${this.summonerInfo.puuid}/ids?api_key=${this.apiKey}`
+                    `https://EUROPE.api.riotgames.com/lol/match/v5/matches/by-puuid/${this.summonerInfo.puuid}/ids?start=0&count=10&api_key=${this.apiKey}`
                 )
                 .then((res) => res.data);
             this.recentMatchIds = promise;
@@ -55,12 +55,22 @@ class Summoner {
         if (this.recentMatchIds === undefined) {
             return;
         } else {
-            const promise = await axios
-                .get(
-                    `https://EUROPE.api.riotgames.com/lol/match/v5/matches/${this.recentMatchIds[0]}?api_key=${this.apiKey}`
-                )
-                .then((res) => res.data);
-            this.recentMatchData = promise;
+            const allPromises = await this.recentMatchIds.map((match) => {
+                return `https://EUROPE.api.riotgames.com/lol/match/v5/matches/${match}?api_key=${this.apiKey}`;
+            });
+
+            const allMatches = Promise.all(
+                allPromises.map((promise) => axios.get(promise))
+            ).then(
+                axios.spread((...allData) => {
+                    return allData;
+                })
+            );
+            const allMatchesFulfilled = await allMatches;
+            const mappedMatches = allMatchesFulfilled.map(
+                (match) => match.data
+            );
+            this.recentMatchData = mappedMatches;
         }
     }
 }
