@@ -9,9 +9,12 @@ import {
     ChampionRunesKda,
     MatchInfoP,
     FlexRow,
-    FlexColumn,
     SummonerSpellIcon,
     RuneIcon,
+    RuneBox,
+    SummonersBox,
+    KDABox,
+    KDA,
 } from "./match/styled";
 
 const Match = (props) => {
@@ -24,27 +27,40 @@ const Match = (props) => {
                 {/* <MatchInfoP>{currentMatch.map}</MatchInfoP> */}
                 <MatchInfoP>{currentMatch.result}</MatchInfoP>
                 <MatchInfoP>{currentMatch.matchDuration}</MatchInfoP>
+                <MatchInfoP>{currentMatch.date}</MatchInfoP>
             </MatchInfoBox>
             <GameInfoBox>
                 <ChampionRunesKda>
                     <FlexRow>
-                        <SummonerChampionImg
-                            src={currentMatch.champion}
-                        ></SummonerChampionImg>
+                        <>
+                            <SummonerChampionImg
+                                src={currentMatch.champion}
+                            ></SummonerChampionImg>
 
-                        <ChampionLevel>{currentMatch.level}</ChampionLevel>
-                        <FlexColumn>
+                            <ChampionLevel>{currentMatch.level}</ChampionLevel>
+                        </>
+                        <SummonersBox>
                             <SummonerSpellIcon
                                 src={currentMatch.summonerSpells[0]}
                             ></SummonerSpellIcon>
                             <SummonerSpellIcon
                                 src={currentMatch.summonerSpells[1]}
                             ></SummonerSpellIcon>
-                        </FlexColumn>
-                        <FlexColumn>
-                            <RuneIcon src={currentMatch.runes[0]}></RuneIcon>
-                            <RuneIcon src={currentMatch.runes[1]}></RuneIcon>
-                        </FlexColumn>
+                        </SummonersBox>
+                        <RuneBox>
+                            <RuneIcon
+                                src={currentMatch.runes.primary}
+                            ></RuneIcon>
+                            <RuneIcon
+                                src={currentMatch.runes.secondary}
+                            ></RuneIcon>
+                        </RuneBox>
+                        <KDABox>
+                            <KDA>{`${currentMatch.kills} / ${currentMatch.deaths} / ${currentMatch.assists}`}</KDA>
+                            <KDA>{currentMatch.kda}</KDA>
+                            <KDA>{`${currentMatch.cs} (${currentMatch.csEachMinute})`}</KDA>
+                            <KDA>{`Vision: ${currentMatch.visionScore}`}</KDA>
+                        </KDABox>
                     </FlexRow>
                 </ChampionRunesKda>
             </GameInfoBox>

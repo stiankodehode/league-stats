@@ -2,6 +2,7 @@ import queues from "../json/queue.json";
 import champions from "../json/champions.json";
 import summonerSpells from "../json/summonerSpells.json";
 import runes from "../json/runes.json";
+import runeTypes from "../json/runeTypes.json";
 
 export const filterMatchData = (currentSummoner, matchData) => {
     // Finds the type of queue
@@ -42,39 +43,74 @@ export const filterMatchData = (currentSummoner, matchData) => {
         });
 
         // Path names needs to be fixed cause communitydragon paths are not the same as the official riot tgz
-        const pathName1 = spell1.iconPath.split("/").pop().toLowerCase();
-        const pathName2 = spell2.iconPath.split("/").pop().toLocaleLowerCase();
+        const fileName1 = spell1.iconPath.split("/").pop().toLowerCase();
+        const fileName2 = spell2.iconPath.split("/").pop().toLocaleLowerCase();
 
         return [
-            `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/data/spells/icons2d/${pathName1}`,
-            `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/data/spells/icons2d/${pathName2}`,
+            `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/data/spells/icons2d/${fileName1}`,
+            `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/data/spells/icons2d/${fileName2}`,
         ];
     };
 
     // Finds the runes current summoner used
 
     const usedRunes = () => {
-        console.log(currentSummonerData.perks);
-        const rune1 = runes.styles.find((perk) => {
-            if (currentSummonerData.perks.styles[0].style === perk.id) {
-                return true;
+        // Keystone used
+        const primaryRune = runes.find((rune) => {
+            if (
+                currentSummonerData.perks.styles[0].selections[0].perk ===
+                rune.id
+            ) {
+                return rune;
             }
         });
-        const rune2 = runes.styles.find((perk) => {
-            if (currentSummonerData.perks.styles[1].style === perk.id) {
-                return true;
+        // Secondary rune tree used
+        const secondaryRune = runeTypes.styles.find((rune) => {
+            if (currentSummonerData.perks.styles[1].style === rune.id) {
+                return rune;
             }
         });
-
-        console.log(rune1);
-        const pathName1 = rune1.iconPath.split("/").pop().toLowerCase();
-        const pathName2 = rune2.iconPath.split("/").pop().toLocaleLowerCase();
-
-        return [
-            `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/${pathName1}`,
-            `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/${pathName2}`,
-        ];
+        // filepath for the Keystone rune
+        const filePath1 = () => {
+            const rune = primaryRune.iconPath.split("/");
+            rune.shift();
+            rune.shift();
+            rune.shift();
+            const joinedPath = rune.join("/");
+            return `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/${joinedPath.toLowerCase()}`;
+        };
+        // filepath for secondary rune tree
+        const filePath2 = () => {
+            const rune = secondaryRune.iconPath.split("/");
+            rune.shift();
+            rune.shift();
+            rune.shift();
+            const joinedPath = rune.join("/");
+            return `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/${joinedPath.toLowerCase()}`;
+        };
+        // returns the file paths
+        return { primary: filePath1(), secondary: filePath2() };
     };
+    // Math for KDA,
+    const kda =
+        (currentSummonerData.kills + currentSummonerData.assists) /
+        currentSummonerData.deaths;
+    // Math for cs/minute
+    const csEachMinute = (
+        (currentSummonerData.totalMinionsKilled / matchData.gameDuration) *
+        60
+    ).toFixed(1);
+    // the date the current match was played on.
+    const gameStart = new Date(matchData.gameStartTimestamp);
+    const startDate = () => {
+        const date = ` ${gameStart.getUTCDate()}.${
+            gameStart.getUTCMonth() + 1
+        }.${gameStart.getUTCFullYear()}`;
+        return date;
+    };
+
+    // Items used
+    
 
     // returns an object with desired keys and data.
     return {
@@ -82,6 +118,7 @@ export const filterMatchData = (currentSummoner, matchData) => {
         map: queueType.map,
         result: currentSummonerData.win ? "WIN" : "LOSS",
         matchDuration: matchDuration,
+        date: startDate(),
         champion: currentChampionUrl,
         summonerSpells: usedSummonerSpells(),
         runes: usedRunes(),
@@ -89,6 +126,10 @@ export const filterMatchData = (currentSummoner, matchData) => {
         kills: currentSummonerData.kills,
         assists: currentSummonerData.assists,
         deaths: currentSummonerData.deaths,
+        kda: kda.toFixed(2),
+        cs: currentSummonerData.totalMinionsKilled,
+        csEachMinute: csEachMinute,
+        visionScore: currentSummonerData.visionScore,
     };
 };
 

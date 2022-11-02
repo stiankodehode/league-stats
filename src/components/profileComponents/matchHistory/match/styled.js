@@ -1,6 +1,16 @@
 import styled from "styled-components";
 
+export const MatchInfoP = styled.p`
+    margin: 0;
+    font-size: 12px;
+`;
+
+export const KDA = styled.h4`
+    font-size: 14px;
+`;
+
 export const MatchBox = styled.div`
+    margin: 5px 0;
     display: flex;
     align-items: center;
     padding: 10px;
@@ -27,11 +37,29 @@ export const FlexRow = styled.div`
     align-items: center;
 `;
 
-export const FlexColumn = styled.div`
+export const SummonersBox = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 2px;
+`;
+
+export const RuneBox = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    border-radius: 3px;
+    margin-left: 2px;
+    background-color: #00000020;
+`;
+
+export const KDABox = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    margin-left: 10px;
 `;
 
 export const ChampionRunesKda = styled.div`
@@ -45,12 +73,12 @@ export const SummonerChampionImg = styled.img`
 `;
 
 export const SummonerSpellIcon = styled.img`
-    width: 25px;
+    width: 20px;
     border-radius: 3px;
 `;
 
 export const RuneIcon = styled.img`
-    width: 25px;
+    width: 20px;
     border-radius: 3px;
 `;
 
@@ -60,7 +88,7 @@ export const ChampionLevel = styled.span`
     justify-content: center;
     position: absolute;
     top: 70%;
-    left: 45%;
+    left: 20%;
     color: black;
     font-weight: 700;
     font-size: 10px;
@@ -68,9 +96,4 @@ export const ChampionLevel = styled.span`
     background-color: white;
     width: 15px;
     height: 15px;
-`;
-
-export const MatchInfoP = styled.p`
-    margin: 0;
-    font-size: 12px;
 `;

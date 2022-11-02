@@ -14,7 +14,7 @@ const MatchHistory = (props) => {
     return (
         <MatchHistoryContainer>
             <RecentStats />
-            {mappedMatches[0]}
+            {mappedMatches}
         </MatchHistoryContainer>
     );
 };
