@@ -9,6 +9,12 @@ export const KDA = styled.h4`
     font-size: 14px;
 `;
 
+export const PlayerParagraph = styled.p`
+    margin: 0;
+    margin-left: 10px;
+    font-size: 10px;
+`;
+
 export const MatchBox = styled.div`
     margin: 5px 0;
     display: flex;
@@ -17,24 +23,33 @@ export const MatchBox = styled.div`
     border-radius: 5px;
     background-color: ${(props) => (props.win ? "#5383E880" : "#E8405780")};
 `;
-
+export const RelativePosition = styled.div`
+    position: relative;
+`;
 export const MatchInfoBox = styled.div`
     display: flex;
     flex-direction: column;
-    margin-right: 25px;
-    width: 80px;
+    margin-right: 15px;
+    min-width: 75px;
 `;
 
 export const GameInfoBox = styled.div`
+    width: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
 `;
 
 export const FlexRow = styled.div`
     display: flex;
     align-items: center;
+    justify-content: space-between;
+`;
+
+export const FlexSpaceBetween = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 `;
 
 export const SummonersBox = styled.div`
@@ -60,6 +75,25 @@ export const KDABox = styled.div`
     align-items: center;
     gap: 2px;
     margin-left: 10px;
+    min-width: 60px;
+`;
+
+export const ItemsBox = styled.div`
+    min-width: 90px;
+    height: 50px;
+    gap: 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+`;
+
+export const PlayersBox = styled.div`
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-height: 70px;
+    min-width: 120px;
 `;
 
 export const ChampionRunesKda = styled.div`
@@ -81,6 +115,12 @@ export const RuneIcon = styled.img`
     width: 20px;
     border-radius: 3px;
 `;
+export const ItemIcon = styled.img`
+    width: 20px;
+    border-radius: 3px;
+    ${(props) =>
+        props.index === 6 ? "margin-top: 15%; margin-left: 3px;" : null}
+`;
 
 export const ChampionLevel = styled.span`
     display: flex;
@@ -88,12 +128,12 @@ export const ChampionLevel = styled.span`
     justify-content: center;
     position: absolute;
     top: 70%;
-    left: 20%;
+    left: 65%;
     color: black;
     font-weight: 700;
-    font-size: 10px;
+    font-size: 12px;
     border-radius: 50%;
     background-color: white;
-    width: 15px;
-    height: 15px;
+    width: 16px;
+    height: 16px;
 `;

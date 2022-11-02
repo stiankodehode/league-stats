@@ -5,16 +5,20 @@ import {
     MatchInfoBox,
     GameInfoBox,
     SummonerChampionImg,
+    SummonerSpellIcon,
     ChampionLevel,
     ChampionRunesKda,
     MatchInfoP,
+    PlayersBox,
     FlexRow,
-    SummonerSpellIcon,
     RuneIcon,
     RuneBox,
     SummonersBox,
     KDABox,
     KDA,
+    ItemsBox,
+    RelativePosition,
+    FlexSpaceBetween,
 } from "./match/styled";
 
 const Match = (props) => {
@@ -29,41 +33,37 @@ const Match = (props) => {
                 <MatchInfoP>{currentMatch.matchDuration}</MatchInfoP>
                 <MatchInfoP>{currentMatch.date}</MatchInfoP>
             </MatchInfoBox>
-            <GameInfoBox>
-                <ChampionRunesKda>
-                    <FlexRow>
-                        <>
-                            <SummonerChampionImg
-                                src={currentMatch.champion}
-                            ></SummonerChampionImg>
+            <FlexSpaceBetween>
+                <FlexRow>
+                    <RelativePosition>
+                        <SummonerChampionImg
+                            src={currentMatch.champion}
+                        ></SummonerChampionImg>
 
-                            <ChampionLevel>{currentMatch.level}</ChampionLevel>
-                        </>
-                        <SummonersBox>
-                            <SummonerSpellIcon
-                                src={currentMatch.summonerSpells[0]}
-                            ></SummonerSpellIcon>
-                            <SummonerSpellIcon
-                                src={currentMatch.summonerSpells[1]}
-                            ></SummonerSpellIcon>
-                        </SummonersBox>
-                        <RuneBox>
-                            <RuneIcon
-                                src={currentMatch.runes.primary}
-                            ></RuneIcon>
-                            <RuneIcon
-                                src={currentMatch.runes.secondary}
-                            ></RuneIcon>
-                        </RuneBox>
-                        <KDABox>
-                            <KDA>{`${currentMatch.kills} / ${currentMatch.deaths} / ${currentMatch.assists}`}</KDA>
-                            <KDA>{currentMatch.kda}</KDA>
-                            <KDA>{`${currentMatch.cs} (${currentMatch.csEachMinute})`}</KDA>
-                            <KDA>{`Vision: ${currentMatch.visionScore}`}</KDA>
-                        </KDABox>
-                    </FlexRow>
-                </ChampionRunesKda>
-            </GameInfoBox>
+                        <ChampionLevel>{currentMatch.level}</ChampionLevel>
+                    </RelativePosition>
+                    <SummonersBox>
+                        <SummonerSpellIcon
+                            src={currentMatch.summonerSpells[0]}
+                        ></SummonerSpellIcon>
+                        <SummonerSpellIcon
+                            src={currentMatch.summonerSpells[1]}
+                        ></SummonerSpellIcon>
+                    </SummonersBox>
+                    <RuneBox>
+                        <RuneIcon src={currentMatch.runes.primary}></RuneIcon>
+                        <RuneIcon src={currentMatch.runes.secondary}></RuneIcon>
+                    </RuneBox>
+                </FlexRow>
+                <KDABox>
+                    <KDA>{`${currentMatch.kills} / ${currentMatch.deaths} / ${currentMatch.assists}`}</KDA>
+                    <KDA>{currentMatch.kda}</KDA>
+                    <KDA>{`${currentMatch.cs} (${currentMatch.csEachMinute})`}</KDA>
+                    <KDA>{`Vision: ${currentMatch.visionScore}`}</KDA>
+                </KDABox>
+                <ItemsBox>{currentMatch.items}</ItemsBox>
+                <PlayersBox>{currentMatch.allPlayers}</PlayersBox>
+            </FlexSpaceBetween>
         </MatchBox>
     );
 };

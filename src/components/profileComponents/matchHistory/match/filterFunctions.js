@@ -3,6 +3,8 @@ import champions from "../json/champions.json";
 import summonerSpells from "../json/summonerSpells.json";
 import runes from "../json/runes.json";
 import runeTypes from "../json/runeTypes.json";
+import items from "../json/items.json";
+import { ItemIcon, PlayerParagraph } from "./styled";
 
 export const filterMatchData = (currentSummoner, matchData) => {
     // Finds the type of queue
@@ -110,7 +112,48 @@ export const filterMatchData = (currentSummoner, matchData) => {
     };
 
     // Items used
-    
+    const itemsArray = [
+        currentSummonerData.item0,
+        currentSummonerData.item1,
+        currentSummonerData.item2,
+        currentSummonerData.item3,
+        currentSummonerData.item4,
+        currentSummonerData.item5,
+        currentSummonerData.item6,
+    ];
+    // Maps the items to give them info from a JSON file
+    const itemInfoArray = itemsArray.map((usedItem) => {
+        const itemInfo = items.find((item) => {
+            if (item.id === usedItem) {
+                return true;
+            }
+        });
+        return itemInfo;
+    });
+    // Sorts the items array to start with the Mythic Item
+    const sortedItemsArray = itemInfoArray.sort((a, b) => {
+        return a.description.includes("rarityMythic") ? -1 : 1;
+    });
+    // Maps the array and returns components ready for rendering
+    const mappedItemsArray = sortedItemsArray.map((usedItem, idx) => {
+        const item = usedItem.iconPath.split("/");
+        item.shift();
+        item.shift();
+        item.shift();
+        const joinedPath = item.join("/");
+        const url = `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/${joinedPath.toLowerCase()}`;
+        return <ItemIcon key={idx} src={url} index={idx}></ItemIcon>;
+    });
+
+    const allPlayers = matchData.participants.map((player) => {
+        return (
+            <PlayerParagraph>
+                {player.summonerName.length > 12
+                    ? player.summonerName.substring(0, 8) + "..."
+                    : player.summonerName}
+            </PlayerParagraph>
+        );
+    });
 
     // returns an object with desired keys and data.
     return {
@@ -130,13 +173,7 @@ export const filterMatchData = (currentSummoner, matchData) => {
         cs: currentSummonerData.totalMinionsKilled,
         csEachMinute: csEachMinute,
         visionScore: currentSummonerData.visionScore,
+        items: mappedItemsArray,
+        allPlayers: allPlayers,
     };
-};
-
-export const filterMatch = (matchData) => {
-    const queueType = queues.filter((element) => {
-        return element.queueId === matchData.queueId;
-    });
-
-    return { queueType: queueType };
 };
