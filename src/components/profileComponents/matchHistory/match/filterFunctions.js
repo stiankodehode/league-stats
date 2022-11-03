@@ -4,7 +4,12 @@ import summonerSpells from "../json/summonerSpells.json";
 import runes from "../json/runes.json";
 import runeTypes from "../json/runeTypes.json";
 import items from "../json/items.json";
-import { ItemIcon, PlayerParagraph } from "./styled";
+import {
+    ItemIcon,
+    ParticipantIcon,
+    ParticipantsContainer,
+    PlayerParagraph,
+} from "./styled";
 
 export const filterMatchData = (currentSummoner, matchData) => {
     // Finds the type of queue
@@ -145,13 +150,28 @@ export const filterMatchData = (currentSummoner, matchData) => {
         return <ItemIcon key={idx} src={url} index={idx}></ItemIcon>;
     });
 
-    const allPlayers = matchData.participants.map((player) => {
+    const allPlayers = matchData.participants.map((player, idx) => {
+        const champion = champions.find((champion) => {
+            if (champion.id === player.championId) {
+                return true;
+            }
+        });
+
+        const championPortrait = champion.squarePortraitPath.split("/");
+        championPortrait.shift();
+        championPortrait.shift();
+        championPortrait.shift();
+        const joinedPath = championPortrait.join("/");
+        const url = `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/${joinedPath.toLowerCase()}`;
         return (
-            <PlayerParagraph>
-                {player.summonerName.length > 12
-                    ? player.summonerName.substring(0, 8) + "..."
-                    : player.summonerName}
-            </PlayerParagraph>
+            <ParticipantsContainer key={idx}>
+                <ParticipantIcon src={url}></ParticipantIcon>
+                <PlayerParagraph>
+                    {player.summonerName.length > 12
+                        ? player.summonerName.substring(0, 8) + "..."
+                        : player.summonerName}
+                </PlayerParagraph>
+            </ParticipantsContainer>
         );
     });
 

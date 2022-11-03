@@ -11,7 +11,7 @@ export const KDA = styled.h4`
 
 export const PlayerParagraph = styled.p`
     margin: 0;
-    margin-left: 10px;
+    margin: 2px 5px;
     font-size: 10px;
 `;
 
@@ -80,7 +80,7 @@ export const KDABox = styled.div`
 
 export const ItemsBox = styled.div`
     min-width: 90px;
-    height: 50px;
+    height: 60px;
     gap: 2px;
     display: flex;
     flex-direction: column;
@@ -92,8 +92,15 @@ export const PlayersBox = styled.div`
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    max-height: 70px;
+    max-height: 85px;
     min-width: 120px;
+    margin-right: 20px;
+`;
+
+export const ParticipantsContainer = styled.div`
+    display: flex;
+    align-items: center;
+    width: 75px;
 `;
 
 export const ChampionRunesKda = styled.div`
@@ -107,19 +114,25 @@ export const SummonerChampionImg = styled.img`
 `;
 
 export const SummonerSpellIcon = styled.img`
-    width: 20px;
+    width: 25px;
     border-radius: 3px;
 `;
 
 export const RuneIcon = styled.img`
-    width: 20px;
+    width: 25px;
     border-radius: 3px;
 `;
 export const ItemIcon = styled.img`
-    width: 20px;
+    width: 25px;
     border-radius: 3px;
+    margin: 1px;
+    outline: 2px solid #00000080;
     ${(props) =>
         props.index === 6 ? "margin-top: 15%; margin-left: 3px;" : null}
+`;
+
+export const ParticipantIcon = styled.img`
+    width: 12px;
 `;
 
 export const ChampionLevel = styled.span`
