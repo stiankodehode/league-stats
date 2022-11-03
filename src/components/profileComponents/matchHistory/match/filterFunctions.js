@@ -6,11 +6,13 @@ import runeTypes from "../json/runeTypes.json";
 import items from "../json/items.json";
 import {
     ItemIcon,
+    ItemIconBlank,
     ParticipantIcon,
     ParticipantsContainer,
     PlayerParagraph,
 } from "./styled";
 
+// Filters the match data and returns an object with the desired info.
 export const filterMatchData = (currentSummoner, matchData) => {
     // Finds the type of queue
     const queueType = queues.find((element) => {
@@ -64,10 +66,7 @@ export const filterMatchData = (currentSummoner, matchData) => {
     const usedRunes = () => {
         // Keystone used
         const primaryRune = runes.find((rune) => {
-            if (
-                currentSummonerData.perks.styles[0].selections[0].perk ===
-                rune.id
-            ) {
+            if (currentSummonerData.perks.styles[0].selections[0].perk === rune.id) {
                 return rune;
             }
         });
@@ -141,6 +140,9 @@ export const filterMatchData = (currentSummoner, matchData) => {
     });
     // Maps the array and returns components ready for rendering
     const mappedItemsArray = sortedItemsArray.map((usedItem, idx) => {
+        if (idx === 5) {
+            return <ItemIconBlank key={idx} index={idx}></ItemIconBlank>;
+        }
         const item = usedItem.iconPath.split("/");
         item.shift();
         item.shift();
@@ -196,4 +198,89 @@ export const filterMatchData = (currentSummoner, matchData) => {
         items: mappedItemsArray,
         allPlayers: allPlayers,
     };
+};
+
+// This function filters all the data from the matches array and returns an object with stats from all games
+
+export const filterStats = (matchArray, currentSummoner) => {
+    const currentSummonerGames = matchArray.map((match) => {
+        const currentSummonerData = match.info.participants.find((participant) => {
+            return participant.summonerName === currentSummoner ? true : false;
+        });
+        return currentSummonerData;
+    });
+
+    const data = () => {
+        let object = {
+            kills: 0,
+            deaths: 0,
+            assists: 0,
+            roles: { top: 0, jungle: 0, mid: 0, bot: 0, support: 0 },
+            results: { wins: 0, losses: 0 },
+            championsPlayed: {},
+        };
+        currentSummonerGames.forEach((game, index) => {
+            // Adds Kills/Deaths/Assists to object
+            object.kills += game.kills;
+            object.deaths += game.deaths;
+            object.assists += game.assists;
+
+            // Switch checks which role you played
+            switch (game.teamPosition) {
+                case "TOP":
+                    object.roles.top++;
+                    break;
+                case "JUNGLE":
+                    object.roles.jungle++;
+                    break;
+                case "MIDDLE":
+                    object.roles.mid++;
+                    break;
+                case "BOTTOM":
+                    object.roles.bot++;
+                    break;
+                case "UTILITY":
+                    object.roles.support++;
+                    break;
+            }
+
+            // Checks for a win or loss
+            game.win === true ? object.results.wins++ : object.results.losses++;
+
+            // Adds your KDA and Games played to an
+            if (game.championName in object.championsPlayed) {
+                object.championsPlayed[game.championName].kills += game.kills;
+                object.championsPlayed[game.championName].deaths += game.deaths;
+                object.championsPlayed[game.championName].assists += game.assists;
+                object.championsPlayed[game.championName].games += 1;
+            } else {
+                object.championsPlayed = {
+                    ...object.championsPlayed,
+                    [game.championName]: {
+                        kills: game.kills,
+                        deaths: game.deaths,
+                        assists: game.assists,
+                        games: 1,
+                        id: game.championId,
+                    },
+                };
+            }
+        });
+        const championsPlayedArray = Object.keys(object.championsPlayed).map((key) => {
+            const champion = key;
+            const statsObject = object.championsPlayed[key];
+            return { [champion]: { ...statsObject } };
+        });
+
+        const rolesArray = Object.keys(object.roles).map((key) => {
+            const role = key.charAt(0).toUpperCase() + key.slice(1);
+            const roleObject = object.roles[key];
+            return { [role]: { ...roleObject } };
+        });
+        object.championsPlayed = championsPlayedArray;
+        object.roles = rolesArray;
+        object.kda = ((object.kills + object.assists) / object.deaths).toFixed(2);
+        return object;
+    };
+    data();
 };

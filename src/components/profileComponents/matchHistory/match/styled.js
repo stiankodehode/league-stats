@@ -29,16 +29,9 @@ export const RelativePosition = styled.div`
 export const MatchInfoBox = styled.div`
     display: flex;
     flex-direction: column;
-    margin-right: 15px;
-    min-width: 75px;
+    margin-right: 10px;
+    min-width: 80px;
 `;
-
-export const GameInfoBox = styled.div`
-    width: 100%;
-    display: flex;
-    align-items: center;
-`;
-
 export const FlexRow = styled.div`
     display: flex;
     align-items: center;
@@ -49,7 +42,7 @@ export const FlexSpaceBetween = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
+    width: 85%;
 `;
 
 export const SummonersBox = styled.div`
@@ -74,12 +67,11 @@ export const KDABox = styled.div`
     flex-direction: column;
     align-items: center;
     gap: 2px;
-    margin-left: 10px;
     min-width: 60px;
 `;
 
 export const ItemsBox = styled.div`
-    min-width: 90px;
+    min-width: 125px;
     height: 60px;
     gap: 2px;
     display: flex;
@@ -93,8 +85,7 @@ export const PlayersBox = styled.div`
     flex-direction: column;
     flex-wrap: wrap;
     max-height: 85px;
-    min-width: 120px;
-    margin-right: 20px;
+    min-width: 150px;
 `;
 
 export const ParticipantsContainer = styled.div`
@@ -127,8 +118,15 @@ export const ItemIcon = styled.img`
     border-radius: 3px;
     margin: 1px;
     outline: 2px solid #00000080;
-    ${(props) =>
-        props.index === 6 ? "margin-top: 15%; margin-left: 3px;" : null}
+    ${(props) => (props.index === 6 ? "margin-top: 15%; margin-left: 3px;" : null)}
+`;
+export const ItemIconBlank = styled.div`
+    width: 25px;
+    height: 25px;
+    border-radius: 3px;
+    margin: 1px;
+    outline: 2px solid #00000080;
+    background-color: #00000020;
 `;
 
 export const ParticipantIcon = styled.img`

@@ -24,6 +24,7 @@ import {
 const Match = (props) => {
     const { matchData, currentSummoner } = props;
     const currentMatch = filterMatchData(currentSummoner, matchData);
+    console.log(currentMatch.items);
     return (
         <MatchBox win={currentMatch.result === "WIN" ? true : false}>
             <MatchInfoBox>

@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 export const ProfilePageContainer = styled.div`
     margin: 0 auto;
-    width: 70%;
+    width: 80%;
+    max-width: 1000px;
     display: flex;
     flex-direction: column;
 `;

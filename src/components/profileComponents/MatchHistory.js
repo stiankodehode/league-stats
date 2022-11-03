@@ -5,16 +5,15 @@ import { MatchHistoryContainer } from "./matchHistory/styled";
 const MatchHistory = (props) => {
     const { recentMatchData, currentSummoner } = props;
     const mappedMatches = recentMatchData.map((match, idx) => (
-        <Match
-            key={idx}
-            matchData={match.info}
-            currentSummoner={currentSummoner}
-        ></Match>
+        <Match key={idx} matchData={match.info} currentSummoner={currentSummoner}></Match>
     ));
     return (
         <MatchHistoryContainer>
-            <RecentStats />
-            {mappedMatches}
+            <RecentStats
+                recentMatchData={recentMatchData}
+                currentSummoner={currentSummoner}
+            />
+            {mappedMatches[1]}
         </MatchHistoryContainer>
     );
 };
