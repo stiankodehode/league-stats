@@ -13,7 +13,7 @@ const MatchHistory = (props) => {
                 recentMatchData={recentMatchData}
                 currentSummoner={currentSummoner}
             />
-            {mappedMatches[1]}
+            {mappedMatches}
         </MatchHistoryContainer>
     );
 };

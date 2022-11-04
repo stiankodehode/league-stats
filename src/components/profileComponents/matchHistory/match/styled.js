@@ -13,6 +13,7 @@ export const PlayerParagraph = styled.p`
     margin: 0;
     margin: 2px 5px;
     font-size: 10px;
+    min-width: fit-content;
 `;
 
 export const MatchBox = styled.div`
@@ -23,6 +24,7 @@ export const MatchBox = styled.div`
     border-radius: 5px;
     background-color: ${(props) => (props.win ? "#5383E880" : "#E8405780")};
 `;
+
 export const RelativePosition = styled.div`
     position: relative;
 `;
@@ -118,7 +120,7 @@ export const ItemIcon = styled.img`
     border-radius: 3px;
     margin: 1px;
     outline: 2px solid #00000080;
-    ${(props) => (props.index === 6 ? "margin-top: 15%; margin-left: 3px;" : null)}
+    ${(props) => (props.index === 6 ? "margin-top: 13%; margin-left: 3px;" : null)}
 `;
 export const ItemIconBlank = styled.div`
     width: 25px;
@@ -130,7 +132,8 @@ export const ItemIconBlank = styled.div`
 `;
 
 export const ParticipantIcon = styled.img`
-    width: 12px;
+    width: 15px;
+    border-radius: 5px;
 `;
 
 export const ChampionLevel = styled.span`

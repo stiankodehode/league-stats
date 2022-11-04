@@ -11,6 +11,14 @@ import {
     ParticipantsContainer,
     PlayerParagraph,
 } from "./styled";
+import {
+    ChampionIcon,
+    ContentContainer,
+    FlexRow,
+    RoleGradient,
+    RoleName,
+    StyledH4,
+} from "../recentStats/styled";
 
 // Filters the match data and returns an object with the desired info.
 export const filterMatchData = (currentSummoner, matchData) => {
@@ -140,7 +148,7 @@ export const filterMatchData = (currentSummoner, matchData) => {
     });
     // Maps the array and returns components ready for rendering
     const mappedItemsArray = sortedItemsArray.map((usedItem, idx) => {
-        if (idx === 5) {
+        if (usedItem.id === 0) {
             return <ItemIconBlank key={idx} index={idx}></ItemIconBlank>;
         }
         const item = usedItem.iconPath.split("/");
@@ -247,12 +255,22 @@ export const filterStats = (matchArray, currentSummoner) => {
             // Checks for a win or loss
             game.win === true ? object.results.wins++ : object.results.losses++;
 
-            // Adds your KDA and Games played to an
+            // Adds your KDA and Games played on specific champions
             if (game.championName in object.championsPlayed) {
+                if (game.win) {
+                    object.championsPlayed[game.championName].wins++;
+                }
                 object.championsPlayed[game.championName].kills += game.kills;
                 object.championsPlayed[game.championName].deaths += game.deaths;
                 object.championsPlayed[game.championName].assists += game.assists;
-                object.championsPlayed[game.championName].games += 1;
+                object.championsPlayed[game.championName].games++;
+                object.championsPlayed[game.championName].kda =
+                    // This recalculates the KDA each time a new game is added
+                    (
+                        (object.championsPlayed[game.championName].kills +
+                            object.championsPlayed[game.championName].assists) /
+                        object.championsPlayed[game.championName].deaths
+                    ).toFixed(2);
             } else {
                 object.championsPlayed = {
                     ...object.championsPlayed,
@@ -261,26 +279,83 @@ export const filterStats = (matchArray, currentSummoner) => {
                         deaths: game.deaths,
                         assists: game.assists,
                         games: 1,
+                        wins: game.win ? 1 : 0,
                         id: game.championId,
+                        kda: ((game.kills + game.assists) / game.deaths).toFixed(2),
                     },
                 };
             }
         });
-        const championsPlayedArray = Object.keys(object.championsPlayed).map((key) => {
-            const champion = key;
-            const statsObject = object.championsPlayed[key];
-            return { [champion]: { ...statsObject } };
-        });
 
-        const rolesArray = Object.keys(object.roles).map((key) => {
-            const role = key.charAt(0).toUpperCase() + key.slice(1);
-            const roleObject = object.roles[key];
-            return { [role]: { ...roleObject } };
-        });
-        object.championsPlayed = championsPlayedArray;
-        object.roles = rolesArray;
+        // This function returns mapped champions played.
+        const championsPlayed = () => {
+            // Turning the champions played objet into an array so i can run .map on it
+            const championsPlayedArray = Object.keys(object.championsPlayed).map(
+                (key) => {
+                    const champion = key;
+                    const statsObject = object.championsPlayed[key];
+                    return { ...statsObject };
+                }
+            );
+            // Sorts champions by games played, if same amount, sort by KDA.
+            const sortedChampionsPlayed = championsPlayedArray.sort((a, b) => {
+                if (a.games === b.games) {
+                    return b.kda - a.kda;
+                }
+                return b.games - a.games;
+            });
+
+            const mappedChampionsPlayed = sortedChampionsPlayed.map((champion, idx) => {
+                const url = `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${champion.id}.png`;
+                return (
+                    <ContentContainer key={idx}>
+                        <ChampionIcon src={url} />
+                        <StyledH4>{`${champion.wins}W ${
+                            champion.games - champion.wins
+                        }L`}</StyledH4>
+                        <StyledH4>{champion.kda} KDA</StyledH4>
+                    </ContentContainer>
+                );
+            });
+            return mappedChampionsPlayed.slice(0, 3);
+        };
+        // Turning the roles object into an array so i can run .map on it.
+        const rolesPlayed = () => {
+            const rolesArray = Object.keys(object.roles).map((key) => {
+                const role = key.charAt(0).toUpperCase() + key.slice(1);
+
+                return { role: role, games: object.roles[key] };
+            });
+            const mappedRoles = rolesArray.map((role, idx) => {
+                const percentage =
+                    (role.games / (object.results.wins + object.results.losses)) * 100;
+                return (
+                    <ContentContainer key={idx}>
+                        <RoleName>{`${role.role} (${role.games})`}</RoleName>
+                        <RoleGradient percentage={percentage} />
+                    </ContentContainer>
+                );
+            });
+            return mappedRoles;
+        };
+
+        // Making some final changes to the object.
+
+        object.championsPlayed = championsPlayed();
+        object.roles = rolesPlayed();
         object.kda = ((object.kills + object.assists) / object.deaths).toFixed(2);
+        object.results = {
+            ...object.results,
+            winrate:
+                (object.results.wins / (object.results.wins + object.results.losses)) *
+                100,
+            games: object.results.wins + object.results.losses,
+        };
+        object.averageKills = object.kills / object.results.games;
+        object.averageDeaths = object.deaths / object.results.games;
+        object.averageAssists = object.assists / object.results.games;
+
         return object;
     };
-    data();
+    return data();
 };

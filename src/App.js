@@ -8,7 +8,7 @@ const API_KEY = process.env.REACT_APP_RIOT_LOL_API_KEY;
 
 function App() {
     const [summonerData, setSummonerData] = useState(new Summoner(API_KEY));
-
+    console.log(summonerData);
     return (
         <SummonerContext.Provider value={{ summonerData, setSummonerData }}>
             <AppContainer>
