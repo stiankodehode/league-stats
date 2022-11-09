@@ -25,7 +25,8 @@ const ProfilePage = () => {
     return (
         <ProfilePageContainer>
             <ProfileBanner summonerInfo={summonerInfo} />
-            <RankedBanner></RankedBanner>
+            <RankedBanner data={summonerData.rankInfo[1]} />
+            <RankedBanner data={summonerData.rankInfo[0]} />
         </ProfilePageContainer>
     );
 };

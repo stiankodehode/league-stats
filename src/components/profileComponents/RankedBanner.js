@@ -35,7 +35,7 @@ const QueueBanner = (props) => {
     //         </FlexColumn>
     //     </FlexContainer>
     // </BannerContainer>
-    return <BannerContainer>ss</BannerContainer>;
+    return <BannerContainer></BannerContainer>;
 };
 
 export default QueueBanner;
