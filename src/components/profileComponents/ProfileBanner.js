@@ -1,26 +1,26 @@
 import {
     ProfileBannerBox,
-    ProfileInfo,
-    SummonerLevel,
-    FlexColumn,
-    SummonerName,
-    UpdateButton,
     ProfileIcon,
+    ProfileIconContainer,
+    ProfileLevel,
+    ProfileInfo,
+    ProfileName,
+    UpdateButton,
 } from "./profileBanner/styled";
 
 const ProfileBanner = (props) => {
     const { summonerInfo } = props;
     return (
         <ProfileBannerBox>
-            <ProfileInfo>
+            <ProfileIconContainer>
                 <ProfileIcon
                     src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/${summonerInfo.profileIconId}.jpg`}
                 ></ProfileIcon>
-                <SummonerLevel>{summonerInfo.summonerLevel}</SummonerLevel>
-                <FlexColumn>
-                    <SummonerName>{summonerInfo.name}</SummonerName>
-                    <UpdateButton>Update!</UpdateButton>
-                </FlexColumn>
+                <ProfileLevel>{summonerInfo.summonerLevel}</ProfileLevel>
+            </ProfileIconContainer>
+            <ProfileInfo>
+                <ProfileName>{summonerInfo.name}</ProfileName>
+                <UpdateButton>Update!</UpdateButton>
             </ProfileInfo>
         </ProfileBannerBox>
     );

@@ -1,72 +1,62 @@
 import styled from "styled-components";
 
 export const ProfileBannerBox = styled.div`
-    padding-top: 25px;
     display: flex;
-    align-items: center;
-    margin-bottom: 25px;
-    width: 100%;
-    @media (max-width: 1200px) {
-        justify-content: center;
-    }
+    padding: 1rem;
+    margin: 0 auto;
+    width: 90%;
+    background: rgba(7, 2, 55, 0.596);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
 `;
 
-export const ProfileInfo = styled.div`
-    padding: 25px;
-    width: 250px;
+export const ProfileIconContainer = styled.div`
+    width: 40%;
     position: relative;
-    display: flex;
-    align-items: center;
-    border-radius: 10px;
-    background: rgba(0, 0, 0, 0.6);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(11.4px);
-    -webkit-backdrop-filter: blur(11.4px);
-    @media (max-width: 1200px) {
-        width: 50%;
-    }
 `;
 
 export const ProfileIcon = styled.img`
-    width: 75px;
-    border-radius: 10px;
-    margin-right: 20px;
+    width: 100%;
+    border: 3px solid #5e50c5;
+    border-radius: 25px;
 `;
 
-export const SummonerName = styled.h2`
-    font-size: 32px;
-    color: #ffffff;
-`;
-
-export const SummonerLevel = styled.h3`
+export const ProfileLevel = styled.span`
     position: absolute;
-    background-color: blue;
-    border-radius: 10px;
-    padding: 2px 5px;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #0a0245;
+    padding: 5px;
+    border: 2px solid #5e50c5;
+    border-radius: 25%;
     color: white;
-    top: 72%;
-    left: 45px;
-    font-size: 14px;
+    font-weight: 700;
 `;
 
-export const FlexColumn = styled.div`
+export const ProfileInfo = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: inherit;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    margin-left: 15px;
+`;
+
+export const ProfileName = styled.h1`
+    color: #ffffff;
+    padding-right: 1rem;
+    font-size: 36px;
+    border-right: 2px solid #5e50c580;
 `;
 
 export const UpdateButton = styled.button`
-    padding: 0.5em;
-    margin-top: 10px;
-    font-weight: bold;
     border: none;
-    background-color: blue;
     color: white;
+    font-size: 20px;
+    font-weight: 700;
+    padding: 10px;
+    background-color: blue;
     border-radius: 10px;
-    max-width: 80%;
-    min-width: 60%;
-    cursor: pointer;
-    &:hover {
-        background-color: darkblue;
-    }
 `;

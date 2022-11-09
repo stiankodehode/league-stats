@@ -42,9 +42,12 @@ export const RegionSelect = styled.select`
 export const SearchInput = styled.input`
     border: none;
     outline: none;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid #00000080;
     margin-left: 5px;
     background: none;
+    ::placeholder {
+        color: #ffffff80;
+    }
 `;
 
 export const SearchButton = styled.button`

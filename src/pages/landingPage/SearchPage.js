@@ -41,12 +41,15 @@ const SearchPage = () => {
             <SearchBox>
                 <StyledForm>
                     <InputBox>
-                        <RegionSelect id="regionSelect">
+                        {/* <RegionSelect id="regionSelect">
                             <option>EUW</option>
                             <option>NA</option>
                             <option>KR</option>
-                        </RegionSelect>
-                        <SearchInput onChange={handleSearch}></SearchInput>
+                        </RegionSelect> */}
+                        <SearchInput
+                            onChange={handleSearch}
+                            placeholder={"Enter summoner name"}
+                        ></SearchInput>
                     </InputBox>
                     <SearchButton onClick={summonerSearch}>Search</SearchButton>
                 </StyledForm>

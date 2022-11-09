@@ -6,7 +6,7 @@ import { SummonerContext } from "../../contextState/summonerContext";
 import ProfileBanner from "../../components/profileComponents/ProfileBanner";
 
 import { ProfilePageContainer, RankedStats, PageWrapper } from "./profilePage/styled";
-import QueueBanner from "../../components/profileComponents/QueueBanner";
+import RankedBanner from "../../components/profileComponents/RankedBanner";
 import MatchHistory from "../../components/profileComponents/MatchHistory";
 
 const ProfilePage = () => {
@@ -25,18 +25,7 @@ const ProfilePage = () => {
     return (
         <ProfilePageContainer>
             <ProfileBanner summonerInfo={summonerInfo} />
-            <PageWrapper>
-                <RankedStats>
-                    {/* Solo/Duo Data */}
-                    <QueueBanner data={summonerData.rankInfo[1]} />
-                    {/* Flex Data */}
-                    <QueueBanner data={summonerData.rankInfo[0]} />
-                </RankedStats>
-                <MatchHistory
-                    recentMatchData={recentMatchData}
-                    currentSummoner={summonerData.summonerName}
-                />
-            </PageWrapper>
+            <RankedBanner></RankedBanner>
         </ProfilePageContainer>
     );
 };

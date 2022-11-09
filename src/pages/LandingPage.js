@@ -1,11 +1,14 @@
+import { useContext } from "react";
 import { Route, Routes } from "react-router-dom";
+
+import { SummonerContext } from "../contextState/summonerContext";
+
 import Navbar from "../components/Navbar";
 import SearchPage from "./landingPage/SearchPage";
 import ProfilePage from "./landingPage/ProfilePage";
 import Leaderboard from "./landingPage/Leaderboard";
-import { SummonerContext } from "../contextState/summonerContext";
-import { useContext } from "react";
 import { Spacer } from "../components/globalStyled";
+
 const LandingPage = () => {
     const { summonerData, setSummonerData } = useContext(SummonerContext);
     return (

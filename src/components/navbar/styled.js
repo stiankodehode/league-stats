@@ -14,11 +14,10 @@ export const StyledNav = styled.nav`
 
 export const NavList = styled.ul`
     list-style: none;
-    width: 80%;
-    max-width: 1000px;
+    padding: 0;
     margin: 0 auto;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
 `;
 
 export const NavItem = styled.li`
