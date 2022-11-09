@@ -25,9 +25,7 @@ const QueueBanner = (props) => {
     return (
         <BannerContainer>
             <StyledHeading>
-                {data.queueType === "RANKED_SOLO_5x5"
-                    ? "Ranked Solo/Duo"
-                    : "Ranked Flex"}
+                {data.queueType === "RANKED_SOLO_5x5" ? "Ranked Solo/Duo" : "Ranked Flex"}
             </StyledHeading>
             <FlexContainer>
                 <RankIcon
@@ -42,9 +40,7 @@ const QueueBanner = (props) => {
                     <LPHeading>{data.leaguePoints} LP</LPHeading>
                 </FlexColumn>
                 <FlexColumn>
-                    <WinLossHeading>
-                        {`${data.wins}W ${data.losses}L`}
-                    </WinLossHeading>
+                    <WinLossHeading>{`${data.wins}W ${data.losses}L`}</WinLossHeading>
                     <WinLossHeading>{`${winPercentage()}% Winrate`}</WinLossHeading>
                     <HardstuckHeading>{`${
                         data.veteran ? "(Hardstuck)" : "(Not Hardstuck)"

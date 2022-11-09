@@ -3,12 +3,10 @@ import { filterMatchData, filterMatch } from "./match/filterFunctions";
 import {
     MatchBox,
     MatchInfoBox,
-    GameInfoBox,
     SummonerChampionImg,
     SummonerSpellIcon,
     ChampionLevel,
-    ChampionRunesKda,
-    MatchInfoP,
+    MatchInfo,
     PlayersBox,
     FlexRow,
     RuneIcon,
@@ -27,11 +25,11 @@ const Match = (props) => {
     return (
         <MatchBox win={currentMatch.result === "WIN" ? true : false}>
             <MatchInfoBox>
-                <MatchInfoP>{currentMatch.queue}</MatchInfoP>
-                {/* <MatchInfoP>{currentMatch.map}</MatchInfoP> */}
-                <MatchInfoP>{currentMatch.result}</MatchInfoP>
-                <MatchInfoP>{currentMatch.matchDuration}</MatchInfoP>
-                <MatchInfoP>{currentMatch.date}</MatchInfoP>
+                <MatchInfo>{currentMatch.queue}</MatchInfo>
+                {/* <MatchInfo>{currentMatch.map}</MatchInfo> */}
+                <MatchInfo>{currentMatch.result}</MatchInfo>
+                <MatchInfo>{currentMatch.matchDuration}</MatchInfo>
+                <MatchInfo>{currentMatch.date}</MatchInfo>
             </MatchInfoBox>
             <FlexSpaceBetween>
                 <FlexRow>
@@ -57,7 +55,7 @@ const Match = (props) => {
                 </FlexRow>
                 <KDABox>
                     <KDA>{`${currentMatch.kills} / ${currentMatch.deaths} / ${currentMatch.assists}`}</KDA>
-                    <KDA>{currentMatch.kda}</KDA>
+                    <KDA>{currentMatch.kda} KDA</KDA>
                     <KDA>{`${currentMatch.cs} (${currentMatch.csEachMinute})`}</KDA>
                     <KDA>{`Vision: ${currentMatch.visionScore}`}</KDA>
                 </KDABox>

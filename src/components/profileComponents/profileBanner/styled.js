@@ -5,6 +5,10 @@ export const ProfileBannerBox = styled.div`
     display: flex;
     align-items: center;
     margin-bottom: 25px;
+    width: 100%;
+    @media (max-width: 1200px) {
+        justify-content: center;
+    }
 `;
 
 export const ProfileInfo = styled.div`
@@ -18,6 +22,9 @@ export const ProfileInfo = styled.div`
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(11.4px);
     -webkit-backdrop-filter: blur(11.4px);
+    @media (max-width: 1200px) {
+        width: 50%;
+    }
 `;
 
 export const ProfileIcon = styled.img`

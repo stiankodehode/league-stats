@@ -5,6 +5,7 @@ import {
     FlexRow,
     KDAContainer,
     RecentStatsContainer,
+    RolesContainer,
     StyledH3,
     StyledH4,
     WinLossContainer,
@@ -29,7 +30,7 @@ const RecentStats = (props) => {
                 <StyledH3>{`${statsData.averageKills} / ${statsData.averageDeaths} / ${statsData.averageAssists}`}</StyledH3>
             </ContentContainer>
             <ChampionsContainer>{statsData.championsPlayed}</ChampionsContainer>
-            <ChampionsContainer>{statsData.roles}</ChampionsContainer>
+            <RolesContainer>{statsData.roles}</RolesContainer>
         </RecentStatsContainer>
     );
 };

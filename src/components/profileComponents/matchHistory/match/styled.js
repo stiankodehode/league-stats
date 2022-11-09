@@ -1,15 +1,15 @@
 import styled from "styled-components";
 
-export const MatchInfoP = styled.p`
+export const MatchInfo = styled.span`
     margin: 0;
     font-size: 12px;
 `;
 
-export const KDA = styled.h4`
+export const KDA = styled.span`
     font-size: 14px;
 `;
 
-export const PlayerParagraph = styled.p`
+export const PlayerName = styled.span`
     margin: 0;
     margin: 2px 5px;
     font-size: 10px;

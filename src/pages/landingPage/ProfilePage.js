@@ -5,11 +5,7 @@ import { SummonerContext } from "../../contextState/summonerContext";
 
 import ProfileBanner from "../../components/profileComponents/ProfileBanner";
 
-import {
-    ProfilePageContainer,
-    RankedStats,
-    PageWrapper,
-} from "./profilePage/styled";
+import { ProfilePageContainer, RankedStats, PageWrapper } from "./profilePage/styled";
 import QueueBanner from "../../components/profileComponents/QueueBanner";
 import MatchHistory from "../../components/profileComponents/MatchHistory";
 

@@ -22,6 +22,12 @@ export const ChampionsContainer = styled.div`
     align-items: center;
 `;
 
+export const RolesContainer = styled.div`
+    display: flex;
+    gap: 10px;
+    align-items: center;
+`;
+
 export const WinLossGradient = styled.div`
     margin-top: 5px;
     width: 90%;

@@ -9,12 +9,11 @@ import {
     ItemIconBlank,
     ParticipantIcon,
     ParticipantsContainer,
-    PlayerParagraph,
+    PlayerName,
 } from "./styled";
 import {
     ChampionIcon,
     ContentContainer,
-    FlexRow,
     RoleGradient,
     RoleName,
     StyledH4,
@@ -176,11 +175,11 @@ export const filterMatchData = (currentSummoner, matchData) => {
         return (
             <ParticipantsContainer key={idx}>
                 <ParticipantIcon src={url}></ParticipantIcon>
-                <PlayerParagraph>
+                <PlayerName>
                     {player.summonerName.length > 12
                         ? player.summonerName.substring(0, 8) + "..."
                         : player.summonerName}
-                </PlayerParagraph>
+                </PlayerName>
             </ParticipantsContainer>
         );
     });
@@ -324,14 +323,26 @@ export const filterStats = (matchArray, currentSummoner) => {
             const rolesArray = Object.keys(object.roles).map((key) => {
                 const role = key.charAt(0).toUpperCase() + key.slice(1);
 
-                return { role: role, games: object.roles[key] };
+                const shortenedRole = () => {
+                    switch (role) {
+                        case "Jungle":
+                            return "JNG";
+                        case "Support":
+                            return "SUP";
+                        default:
+                            return role.toUpperCase();
+                    }
+                };
+
+                return { role: shortenedRole(), games: object.roles[key] };
             });
             const mappedRoles = rolesArray.map((role, idx) => {
                 const percentage =
                     (role.games / (object.results.wins + object.results.losses)) * 100;
                 return (
                     <ContentContainer key={idx}>
-                        <RoleName>{`${role.role} (${role.games})`}</RoleName>
+                        <RoleName>{role.role}</RoleName>
+                        <RoleName>({role.games})</RoleName>
                         <RoleGradient percentage={percentage} />
                     </ContentContainer>
                 );
