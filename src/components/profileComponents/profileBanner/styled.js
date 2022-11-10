@@ -4,7 +4,7 @@ export const ProfileBannerBox = styled.div`
     display: flex;
     padding: 1rem;
     margin: 0 auto;
-    width: 90%;
+    width: 100%;
     background: rgba(7, 2, 55, 0.596);
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);

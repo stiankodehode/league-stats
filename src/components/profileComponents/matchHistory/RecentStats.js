@@ -18,7 +18,7 @@ const RecentStats = (props) => {
 
     return (
         <RecentStatsContainer>
-            <ContentContainer>
+            {/* <ContentContainer>
                 <FlexRow>
                     <StyledH4>{statsData.results.wins} Wins</StyledH4>
                     <StyledH4>{statsData.results.losses} Losses</StyledH4>
@@ -30,7 +30,7 @@ const RecentStats = (props) => {
                 <StyledH3>{`${statsData.averageKills} / ${statsData.averageDeaths} / ${statsData.averageAssists}`}</StyledH3>
             </ContentContainer>
             <ChampionsContainer>{statsData.championsPlayed}</ChampionsContainer>
-            <RolesContainer>{statsData.roles}</RolesContainer>
+            <RolesContainer>{statsData.roles}</RolesContainer> */}
         </RecentStatsContainer>
     );
 };

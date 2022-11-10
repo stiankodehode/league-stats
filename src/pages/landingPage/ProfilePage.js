@@ -27,6 +27,10 @@ const ProfilePage = () => {
             <ProfileBanner summonerInfo={summonerInfo} />
             <RankedBanner data={summonerData.rankInfo[1]} />
             <RankedBanner data={summonerData.rankInfo[0]} />
+            <MatchHistory
+                recentMatchData={recentMatchData}
+                currentSummoner={summonerData}
+            />
         </ProfilePageContainer>
     );
 };
