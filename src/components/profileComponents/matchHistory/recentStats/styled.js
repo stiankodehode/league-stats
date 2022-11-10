@@ -1,30 +1,40 @@
 import styled from "styled-components";
 
 export const RecentStatsContainer = styled.div`
-    margin: 5px 0;
     display: flex;
+    flex-wrap: wrap;
+    color: white;
+`;
+
+export const RecentWins = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 50%;
+`;
+export const RecentKDA = styled.div`
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    padding: 10px;
-    border-radius: 5px;
-    background-color: #121233;
+    width: 50%;
+`;
+
+export const RecentChampions = styled.div`
+    display: flex;
+    gap: 10px;
+    align-items: center;
+`;
+
+export const RecentRoles = styled.div`
+    display: flex;
+    gap: 10px;
+    align-items: center;
 `;
 
 export const ContentContainer = styled.div`
     display: flex;
     flex-direction: column;
     text-align: center;
-    align-items: center;
-`;
-export const ChampionsContainer = styled.div`
-    display: flex;
-    gap: 10px;
-    align-items: center;
-`;
-
-export const RolesContainer = styled.div`
-    display: flex;
-    gap: 10px;
     align-items: center;
 `;
 

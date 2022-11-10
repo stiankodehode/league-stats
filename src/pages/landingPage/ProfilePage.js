@@ -29,7 +29,7 @@ const ProfilePage = () => {
             <RankedBanner data={summonerData.rankInfo[0]} />
             <MatchHistory
                 recentMatchData={recentMatchData}
-                currentSummoner={summonerData}
+                currentSummoner={summonerData.summonerName}
             />
         </ProfilePageContainer>
     );
