@@ -5,20 +5,30 @@ export const ProfileBannerBox = styled.div`
     padding: 1rem;
     margin: 0 auto;
     width: 100%;
+
     background: rgba(7, 2, 55, 0.596);
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
+    @media (min-width: 500px) {
+        margin: 0 auto;
+        max-width: 400px;
+    }
+    @media (min-width: 1000px) {
+        max-width: 35%;
+        margin: 0;
+    }
 `;
 
 export const ProfileIconContainer = styled.div`
     width: 40%;
+    max-width: 100px;
     position: relative;
 `;
 
 export const ProfileIcon = styled.img`
-    width: 100%;
+    width: 100px;
     border: 3px solid #5e50c5;
     border-radius: 25px;
 `;

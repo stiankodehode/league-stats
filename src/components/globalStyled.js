@@ -13,6 +13,8 @@ export const BackgroundImage = styled.div`
 `;
 
 export const AppContainer = styled.div`
+    margin: 0;
+    width: 100%;
     background-image: linear-gradient(
             90deg,
             #122361 0%,
@@ -20,7 +22,7 @@ export const AppContainer = styled.div`
             #00000080 65%,
             #122361 100%
         ),
-        url("https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-splashes/53/53000.jpg");
+        url("https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-splashes/53/53001.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;

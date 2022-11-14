@@ -13,6 +13,11 @@ export const BannerContainer = styled.div`
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
+    @media (min-width: 500px) {
+        max-width: 400px;
+        justify-content: flex-start;
+        margin: 1rem 0;
+    }
 `;
 
 export const RankedIcon = styled.img`

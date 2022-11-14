@@ -14,6 +14,7 @@ import {
 import {
     ChampionIcon,
     ContentContainer,
+    RecentChampionContainer,
     RoleGradient,
     RoleName,
     StyledH4,
@@ -146,18 +147,6 @@ export const filterMatchData = (currentSummoner, matchData) => {
         return a.description.includes("rarityMythic") ? -1 : 1;
     });
     // Maps the array and returns components ready for rendering
-    const mappedItemsArray = sortedItemsArray.map((usedItem, idx) => {
-        if (usedItem.id === 0) {
-            return <ItemIconBlank key={idx} index={idx}></ItemIconBlank>;
-        }
-        const item = usedItem.iconPath.split("/");
-        item.shift();
-        item.shift();
-        item.shift();
-        const joinedPath = item.join("/");
-        const url = `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/${joinedPath.toLowerCase()}`;
-        return <ItemIcon key={idx} src={url} index={idx}></ItemIcon>;
-    });
 
     const allPlayers = matchData.participants.map((player, idx) => {
         const champion = champions.find((champion) => {
@@ -202,7 +191,7 @@ export const filterMatchData = (currentSummoner, matchData) => {
         cs: currentSummonerData.totalMinionsKilled,
         csEachMinute: csEachMinute,
         visionScore: currentSummonerData.visionScore,
-        items: mappedItemsArray,
+        items: sortedItemsArray,
         allPlayers: allPlayers,
     };
 };
@@ -304,19 +293,7 @@ export const filterStats = (matchArray, currentSummoner) => {
                 return b.games - a.games;
             });
 
-            const mappedChampionsPlayed = sortedChampionsPlayed.map((champion, idx) => {
-                const url = `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${champion.id}.png`;
-                return (
-                    <ContentContainer key={idx}>
-                        <ChampionIcon src={url} />
-                        <StyledH4>{`${champion.wins}W ${
-                            champion.games - champion.wins
-                        }L`}</StyledH4>
-                        <StyledH4>{champion.kda} KDA</StyledH4>
-                    </ContentContainer>
-                );
-            });
-            return mappedChampionsPlayed.slice(0, 3);
+            return sortedChampionsPlayed.slice(0, 3);
         };
         // Turning the roles object into an array so i can run .map on it.
         const rolesPlayed = () => {
@@ -336,18 +313,7 @@ export const filterStats = (matchArray, currentSummoner) => {
 
                 return { role: shortenedRole(), games: object.roles[key] };
             });
-            const mappedRoles = rolesArray.map((role, idx) => {
-                const percentage =
-                    (role.games / (object.results.wins + object.results.losses)) * 100;
-                return (
-                    <ContentContainer key={idx}>
-                        <RoleName>{role.role}</RoleName>
-                        <RoleName>({role.games})</RoleName>
-                        <RoleGradient percentage={percentage} />
-                    </ContentContainer>
-                );
-            });
-            return mappedRoles;
+            return rolesArray;
         };
 
         // Making some final changes to the object.
