@@ -5,6 +5,7 @@ Starting off as a simple match history
 ## Things to do before publishing
 
 Setting up an API proxy.
+
 Finishing the design for desktop, currently only works well on mobile.
 
 ## Planned features
